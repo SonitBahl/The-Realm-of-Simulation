@@ -1,99 +1,72 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CharacterController))]
 public class CharController : MonoBehaviour
 {
-    [Header("Animator Settings")]
+    [Header("Movement Settings")]
+    public float speed = 3;
+    public float backwardSpeed = 1.5f; // Adjust as needed
+    public float rotationSpeed = 90;
+    public float gravity = -20f;
+    public float jumpSpeed = 15;
+    public float sprintMultiplier = 2; // Adjust as needed
+
+    [Header("Animation Settings")]
     public Animator animator;
 
-    [Header("Movement Settings")]
-    public float walkSpeed = 5f;
-    public float runSpeed = 10f;
+    CharacterController characterController;
+    Vector3 moveVelocity;
+    Vector3 turnVelocity;
 
-    [Header("Jump Settings")]
-    public float jumpForce = 10f;
-    private bool canJump = true;
-    private float jumpCooldownTimer = 0f;
-    public Transform groundCheck; // Remove the ground check
-
-    [Header("Rigidbody")]
-    public Rigidbody rb;
-
-    void Start()
+    void Awake()
     {
-        // If animator or rigidbody are not assigned, try to find them on the GameObject
-        if (animator == null)
-            animator = GetComponent<Animator>();
-        if (rb == null)
-            rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
     }
 
     void Update()
     {
-        // Get input for movement
-        float moveInputVertical = Input.GetAxis("Vertical");
-        float moveInputHorizontal = Input.GetAxis("Horizontal");
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        var hInput = Input.GetAxis("Horizontal");
+        var vInput = Input.GetAxis("Vertical");
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
-        // Set animator triggers based on movement input
-        if (moveInputVertical != 0 || moveInputHorizontal != 0)
+        if (characterController.isGrounded)
         {
-            animator.ResetTrigger("walkback");
-            animator.SetTrigger("walk");
-            if (isRunning)
-                animator.SetTrigger("run");
-        }
-        else
-        {
-            animator.ResetTrigger("walk");
-            animator.ResetTrigger("walkback");
-            animator.ResetTrigger("run");
-        }
-
-        // Jump cooldown
-        if (!canJump)
-        {
-            jumpCooldownTimer += Time.deltaTime;
-            if (jumpCooldownTimer >= 5f) // Adjust cooldown duration here
+            float currentSpeed = isSprinting ? speed * sprintMultiplier : speed;
+            moveVelocity = transform.forward * currentSpeed * vInput;
+            turnVelocity = transform.up * rotationSpeed * hInput;
+            if (Input.GetButtonDown("Jump"))
             {
-                canJump = true;
-                jumpCooldownTimer = 0f;
+                moveVelocity.y = jumpSpeed;
+                animator.SetTrigger("jump");
+            }
+            else if (vInput > 0)
+            {
+                animator.SetBool("walk", true);
+                animator.SetBool("walkback", false);
+                animator.SetBool("run", isSprinting);
+                animator.SetBool("idle", false);
+            }
+            else if (vInput < 0)
+            {
+                animator.SetBool("walk", false);
+                animator.SetBool("walkback", true);
+                animator.SetBool("run", false);
+                animator.SetBool("idle", false);
+            }
+            else
+            {
+                animator.SetBool("walk", false);
+                animator.SetBool("walkback", false);
+                animator.SetBool("run", false);
+                animator.SetBool("idle", true);
             }
         }
 
-        // Trigger jump animation and apply force if jump is allowed and jump key is pressed
-        if (canJump && Input.GetButtonDown("Jump"))
-        {
-            animator.SetTrigger("jump");
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            canJump = false; // Prevent jumping until cooldown is over
-        }
-    }
-
-    void FixedUpdate()
-    {
-        // Move the character
-        float moveInputVertical = Input.GetAxis("Vertical");
-        float moveInputHorizontal = Input.GetAxis("Horizontal");
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-
-        Vector3 moveDirection = new Vector3(moveInputHorizontal, 0, moveInputVertical).normalized;
-
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion newRotation = Quaternion.LookRotation(moveDirection);
-            rb.MoveRotation(Quaternion.Slerp(transform.rotation, newRotation, 10f * Time.fixedDeltaTime));
-        }
-
-        Vector3 movement = moveDirection;
-        if (isRunning)
-        {
-            movement *= runSpeed;
-        }
-        else
-        {
-            movement *= walkSpeed;
-        }
-
-        rb.MovePosition(transform.position + movement * Time.fixedDeltaTime);
+        // Adding gravity
+        moveVelocity.y += gravity * Time.deltaTime;
+        characterController.Move(moveVelocity * Time.deltaTime);
+        transform.Rotate(turnVelocity * Time.deltaTime);
     }
 }

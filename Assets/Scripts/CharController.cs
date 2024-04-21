@@ -7,11 +7,11 @@ public class CharController : MonoBehaviour
 {
     [Header("Movement Settings")]
     public float speed = 3;
-    public float backwardSpeed = 1.5f; // Adjust as needed
+    public float backwardSpeed = 1.5f; 
     public float rotationSpeed = 90;
     public float gravity = -20f;
-    public float jumpSpeed = 15;
-    public float sprintMultiplier = 2; // Adjust as needed
+    public float jumpSpeed = 1.5f;
+    public float sprintMultiplier = 2; 
 
     [Header("Animation Settings")]
     public Animator animator;
@@ -63,8 +63,7 @@ public class CharController : MonoBehaviour
                 animator.SetBool("idle", true);
             }
         }
-
-        // Adding gravity
+        
         moveVelocity.y += gravity * Time.deltaTime;
         characterController.Move(moveVelocity * Time.deltaTime);
         transform.Rotate(turnVelocity * Time.deltaTime);

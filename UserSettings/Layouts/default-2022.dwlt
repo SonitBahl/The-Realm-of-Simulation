@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1280
     height: 629.3334
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Game
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 94
+  controlID: 97
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -217,8 +217,8 @@ MonoBehaviour:
     y: 0
     width: 316.66666
     height: 394.66666
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -393,9 +393,9 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 67.5, y: -123.33333}
+      snapOffset: {x: -112, y: 26.666666}
       snapOffsetDelta: {x: 0, y: 0}
-      snapCorner: 2
+      snapCorner: 1
       id: Orientation
       index: 0
       layout: 4
@@ -588,7 +588,7 @@ MonoBehaviour:
       floating: 1
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 248.66666, y: 233.33331}
+      snapOffset: {x: 50, y: 234.66664}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: UnityEditor.SceneViewCameraOverlay
@@ -607,9 +607,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 7.335383, y: 1.2913058, z: 1.7518928}
+    m_Target: {x: -275.34738, y: 96.57902, z: -24.007828}
     speed: 2
-    m_Value: {x: 7.335383, y: 1.2913058, z: 1.7518928}
+    m_Value: {x: -275.34738, y: 96.57902, z: -24.007828}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -655,13 +655,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.17029566, y: 0.14367792, z: -0.025384411, w: 0.9747672}
+    m_Target: {x: 0.14288288, y: -0.66940033, z: 0.13115962, w: 0.71845436}
     speed: 2
-    m_Value: {x: 0.16928194, y: 0.14367026, z: -0.025234794, w: 0.97471315}
+    m_Value: {x: 0.14274792, y: -0.66876805, z: 0.13103573, w: 0.71777576}
   m_Size:
-    m_Target: 0.63403594
+    m_Target: 9.197693
     speed: 2
-    m_Value: 0.63403594
+    m_Value: 9.197693
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -722,21 +722,21 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 94a6ffff
+      scrollPos: {x: 0, y: 21455.334}
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2cfbffff
+      m_ExpandedIDs: 8cd6faffbe7afbff26c3fbffccdbfbff740dfcff322afcff462cfcffc02efcff6a31fcffb452fcffb659fcffe85efcffe874fcff7884fcffb890fcff0eb7fcff88b9fcff8cbcfcffc2c0fcff3cc4fcff7e0afdffc039fdff366dfdffa496fdffa896fdffbc96fdfff096fdffaae9fdffbae9fdff70f3fdfff2f8fdff043affff566effff3ea5ffff3ae3ffff2cfbffff7aa50000c8a90000d2cf000056241800d8271800ba2a1800c82b1800c02f1800a0391800da3a1800b43d18008a491800b84b18004853180040561800945a1800985a1800ca5c1800f6611800c0681800aa6d1800ce6e18001a7018003a7418002a7b1800
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Kachujin G Rosales
-        m_OriginalName: Kachujin G Rosales
+        m_Name: Bush 2 mass prefab (10)
+        m_OriginalName: Bush 2 mass prefab (10)
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 23952
+        m_UserData: -250304
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -962,7 +962,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Animations
+    - Assets/Characters
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -970,16 +970,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Animations
+  - Assets/Characters
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\sonit\OneDrive\Desktop\Work\Unity\Projects\The-Realm-of-Simulation
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 84.33334}
-    m_SelectedIDs: 545f0000
-    m_LastClickedID: 24404
-    m_ExpandedIDs: 00000000525f000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: 625f0000
+    m_LastClickedID: 24418
+    m_ExpandedIDs: 00000000505f00005c5f000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1007,7 +1007,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000
+    m_ExpandedIDs: 00000000505f0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

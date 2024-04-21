@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6716362203666186496}
   - component: {fileID: 2275150784588885594}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: PlayerCam
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1204399815366046683}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.03000021, y: 0.029999971, z: -1.85}
+  m_LocalPosition: {x: 0.03000021, y: 0.56, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -107,6 +107,7 @@ GameObject:
   - component: {fileID: 711693423083484628}
   - component: {fileID: 3964293576868007927}
   - component: {fileID: 2915440403060099222}
+  - component: {fileID: 5179483913583801000}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -124,7 +125,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.52, y: 0.9, z: 3.44}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8000001, y: 0.79999995, z: 0.80000013}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7343455324759689326}
@@ -200,7 +201,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.26
+  m_Radius: 0.24
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -220,7 +221,7 @@ MonoBehaviour:
   backwardSpeed: 1.5
   rotationSpeed: 90
   gravity: -20
-  jumpSpeed: 15
+  jumpSpeed: 7
   sprintMultiplier: 2
   animator: {fileID: 1122119342347133413}
 --- !u!54 &3964293576868007927
@@ -276,6 +277,24 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &5179483913583801000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953550757197978226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6be2a7f7671304a45936803ef55a5144, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CarController: {fileID: 0}
+  vehicle: {fileID: 0}
+  Player: {fileID: 1557691358507035615}
+  PlayerCam: {fileID: 1204399815366046683}
+  CarCam: {fileID: 0}
+  maxDistance: 5
 --- !u!1001 &7089660633519353733
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -294,7 +313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 362f9c00a7765cc45b975909347051aa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.96
+      value: -1.035
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 362f9c00a7765cc45b975909347051aa, type: 3}
       propertyPath: m_LocalPosition.z

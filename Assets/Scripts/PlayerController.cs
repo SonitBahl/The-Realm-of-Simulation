@@ -3,29 +3,29 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public MonoBehaviour CarController;
-    public Transform vehicle;
+    public CharacterController PlayerControllerScript; 
+    public Transform Car;
     public Transform Player;
 
     [Header("Cameras")]
-    public Camera PlayerCam;
-    public Camera CarCam;
+    public GameObject PlayerCam;
+    public GameObject CarCam;
 
-    bool CanDrive;
+    bool CanDrive = true; 
 
-    [SerializeField]
-    float maxDistance = 5f;
-
+    // Start is called before the first frame update
     void Start()
     {
         CarController.enabled = false;
-        SetPlayerCameraActive(true);
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F) && CanDrive && Vector3.Distance(Player.position, vehicle.position) <= maxDistance)
+        if (Input.GetKeyDown(KeyCode.F) && CanDrive)
         {
             EnterVehicle();
+            CanDrive = false; 
         }
 
         if (Input.GetKeyDown(KeyCode.G))
@@ -37,44 +37,56 @@ public class PlayerController : MonoBehaviour
     void EnterVehicle()
     {
         CarController.enabled = true;
-        Player.transform.SetParent(vehicle);
+
+        // Parent the player to the car
+        Player.SetParent(Car);
         Player.gameObject.SetActive(false);
-        SetPlayerCameraActive(false);
-        SetCarCameraActive(true);
+
+        // Enable car camera and disable player camera
+        PlayerCam.SetActive(false);
+        CarCam.SetActive(true);
+
+        PlayerControllerScript.enabled = false; 
     }
 
     void ExitVehicle()
+{
+    CarController.enabled = false;
+
+    // Calculate the right exit position
+    Vector3 exitOffset = Car.right * 2.7f; 
+    Vector3 exitPosition = Car.position + exitOffset;
+
+    // Cast a ray from the exit position downward to find the ground
+    RaycastHit hit;
+    if (Physics.Raycast(exitPosition, Vector3.down, out hit))
     {
-        CarController.enabled = false;
-        Player.transform.SetParent(null);
-        Player.gameObject.SetActive(true);
-        SetPlayerCameraActive(true);
-        SetCarCameraActive(false);
+        // Ensure the player is above the ground
+        exitPosition.y = hit.point.y + 0.1f; 
+    }
+    else
+    {
+        // If no ground is found, just use the car's position
+        exitPosition = Car.position + Vector3.up * 0.1f + exitOffset;
     }
 
-    void SetPlayerCameraActive(bool active)
-    {
-        PlayerCam.enabled = active;
-    }
+    // Unparent the player from the car and position to the right
+    Player.SetParent(null);
+    Player.position = exitPosition;
+    Player.gameObject.SetActive(true);
 
-    void SetCarCameraActive(bool active)
-    {
-        CarCam.enabled = active;
-    }
+    // Enable player camera and disable car camera
+    PlayerCam.SetActive(true);
+    CarCam.SetActive(false);
+
+    PlayerControllerScript.enabled = true; 
+}
 
     void OnTriggerStay(Collider col)
     {
-        if (col.gameObject.CompareTag("vehicle"))
+        if (col.gameObject.tag == "Player")
         {
             CanDrive = true;
-        }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.CompareTag("vehicle"))
-        {
-            CanDrive = false;
         }
     }
 }
